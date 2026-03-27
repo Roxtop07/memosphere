@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 Enhanced Search Test - Case-Insensitive & Comprehensive</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header p {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+        
+        .search-box {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+        
+        .search-input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        input[type="text"] {
+            flex: 1;
+            padding: 16px 20px;
+            font-size: 18px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        button {
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .quick-tests {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .quick-test-btn {
+            padding: 12px 20px;
+            background: #f8f9fa;
+            color: #333;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        
+        .quick-test-btn:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            transform: none;
+        }
+        
+        .results-section {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .stats {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-card {
+            flex: 1;
+            min-width: 200px;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .result-group {
+            margin-bottom: 30px;
+        }
+        
+        .result-group h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .result-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .result-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .result-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .result-description {
+            color: #666;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        
+        .result-meta {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .badge-type {
+            background: #667eea;
+            color: white;
+        }
+        
+        .badge-status {
+            background: #10b981;
+            color: white;
+        }
+        
+        .badge-relevance {
+            background: #f59e0b;
+            color: white;
+        }
+        
+        .tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .tag {
+            background: #e0e7ff;
+            color: #667eea;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+        
+        .empty-state-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 18px;
+            color: #667eea;
+        }
+        
+        .spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .feature-highlight {
+            background: #e0e7ff;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .feature-highlight h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .feature-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 10px;
+        }
+        
+        .feature-list li {
+            padding: 8px 0;
+            color: #555;
+        }
+        
+        .feature-list li:before {
+            content: "✅ ";
+            margin-right: 8px;
+        }
+    </style>
+</head>
+overflow-x: auto; } .status { padding: 5px 10px; border-radius: 3px; font-weight: bold; } .status.success { background: #d4edda; color: #155724; } .status.error { background: #f8d7da; color: #721c24; }
+</style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🔍 Enhanced Search Test</h1>
+            <p>Case-Insensitive & Comprehensive Field Search</p>
+        </div>
+
+        <!-- Feature Highlights -->
+        <div class="search-box">
+            <div class="feature-highlight">
+                <h4>✨ Search Features</h4>
+                <ul class="feature-list">
+                    <li>Case-insensitive (UPPER, lower, MiXeD)</li>
+                    <li>Searches ALL fields (13+ per content type)</li>
+                    <li>Smart relevance scoring</li>
+                    <li>Multi-word queries</li>
+                    <li>Partial matching</li>
+                    <li>Permission-aware (secure)</li>
+                </ul>
+            </div>
+
+            <!-- Search Input -->
+            <div class="search-input-group">
+                <input type="text" id="searchQuery" placeholder="Try: 'PLANNING', 'q4', 'Alice', 'budget strategy'..." />
+                <button onclick="performSearch()">🔍 Search</button>
+            </div>
+
+            <!-- Quick Test Buttons -->
+            <div class="quick-tests">
+                <button class="quick-test-btn" onclick="quickSearch('PLANNING')">UPPERCASE: "PLANNING"</button>
+                <button class="quick-test-btn" onclick="quickSearch('planning')">lowercase: "planning"</button>
+                <button class="quick-test-btn" onclick="quickSearch('Q4')">Short: "Q4"</button>
+                <button class="quick-test-btn" onclick="quickSearch('Alice Johnson')">Person: "Alice Johnson"</button>
+                <button class="quick-test-btn" onclick="quickSearch('budget')">Tag: "budget"</button>
+                <button class="quick-test-btn" onclick="quickSearch('strategy quarterly')">Multi-word: "strategy quarterly"</button>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="results" class="results-section" style="display: none;">
+            <!-- Stats -->
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalResults">0</div>
+                    <div class="stat-label">Total Results</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="meetingsCount">0</div>
+                    <div class="stat-label">Meetings</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="eventsCount">0</div>
+                    <div class="stat-label">Events</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="policiesCount">0</div>
+                    <div class="stat-label">Policies</div>
+                </div>
+            </div>
+
+            <!-- Results Content -->
+            <div id="resultsContent"></div>
+        </div>
+    </div>
+
+    <script>
+        function quickSearch(query) {
+            document.getElementById('searchQuery').value = query;
+            performSearch();
+        }
+
+        async function performSearch() {
+            const query = document.getElementById('searchQuery').value.trim();
+            const resultsDiv = document.getElementById('results');
+            const resultsContent = document.getElementById('resultsContent');
+
+            if (!query || query.length < 2) {
+                alert('Please enter at least 2 characters to search');
+                return;
+            }
+
+            // Show loading
+            resultsDiv.style.display = 'block';
+            resultsContent.innerHTML = '<div class="loading"><div class="spinner"></div><p>Searching for "' + query + '"...</p></div>';
+
+            try {
+                const response = await fetch(`/api/search?q=${encodeURIComponent(query)}&userId=user_1&organizationId=org_1&userRole=admin`);
+                const data = await response.json();
+
+                if (!data.success) {
+                    resultsContent.innerHTML = '<div class="empty-state"><div class="empty-state-icon">❌</div><h3>Search Failed</h3><p>' + (data.error || 'Unknown error') + '</p></div>';
+                    return;
+                }
+
+                // Update stats
+                document.getElementById('totalResults').textContent = data.count;
+                document.getElementById('meetingsCount').textContent = data.grouped.meetings.length;
+                document.getElementById('eventsCount').textContent = data.grouped.events.length;
+                document.getElementById('policiesCount').textContent = data.grouped.policies.length;
+
+                // Display results
+                if (data.count === 0) {
+                    resultsContent.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">🔍</div>
+                            <h3>No Results Found</h3>
+                            <p>No matches for "<strong>${query}</strong>"</p>
+                            <p>Try different keywords or check your search criteria</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                let html = '';
+
+                // Meetings
+                if (data.grouped.meetings.length > 0) {
+                    html += '<div class="result-group">';
+                    html += '<h3>📅 Meetings (' + data.grouped.meetings.length + ')</h3>';
+                    data.grouped.meetings.forEach(result => {
+                        html += renderResultCard(result);
+                    });
+                    html += '</div>';
+                }
+
+                // Events
+                if (data.grouped.events.length > 0) {
+                    html += '<div class="result-group">';
+                    html += '<h3>👥 Events (' + data.grouped.events.length + ')</h3>';
+                    data.grouped.events.forEach(result => {
+                        html += renderResultCard(result);
+                    });
+                    html += '</div>';
+                }
+
+                // Policies
+                if (data.grouped.policies.length > 0) {
+                    html += '<div class="result-group">';
+                    html += '<h3>📄 Policies (' + data.grouped.policies.length + ')</h3>';
+                    data.grouped.policies.forEach(result => {
+                        html += renderResultCard(result);
+                    });
+                    html += '</div>';
+                }
+
+                resultsContent.innerHTML = html;
+            } catch (error) {
+                resultsContent.innerHTML = '<div class="empty-state"><div class="empty-state-icon">⚠️</div><h3>Error</h3><p>' + error.message + '</p></div>';
+            }
+        }
+
+        function renderResultCard(result) {
+            const date = result.date ? new Date(result.date).toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric'
+            }) : '';
+
+            let html = '<div class="result-card">';
+            html += '<div class="result-title">' + escapeHtml(result.title) + '</div>';
+
+            if (result.description) {
+                html += '<div class="result-description">' + escapeHtml(result.description) + '</div>';
+            }
+
+            html += '<div class="result-meta">';
+            html += '<span class="badge badge-type">' + result.type.toUpperCase() + '</span>';
+
+            if (result.status) {
+                html += '<span class="badge badge-status">' + result.status + '</span>';
+            }
+
+            if (result.relevance) {
+                html += '<span class="badge badge-relevance">Score: ' + result.relevance + '</span>';
+            }
+
+            if (date) {
+                html += '<span>📅 ' + date + '</span>';
+            }
+
+            if (result.location) {
+                html += '<span>📍 ' + escapeHtml(result.location) + '</span>';
+            }
+
+            if (result.tags && result.tags.length > 0) {
+                html += '<div class="tags">';
+                result.tags.forEach(tag => {
+                    html += '<span class="tag">' + escapeHtml(tag) + '</span>';
+                });
+                html += '</div>';
+            }
+
+            html += '</div></div>';
+            return html;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Allow Enter key to search
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('searchQuery').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

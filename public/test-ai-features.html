@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memosphere AI Features Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        
+        .test-button {
+            background: #007acc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .test-button:hover {
+            background: #005a9e;
+        }
+        
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            white-space: pre-wrap;
+        }
+        
+        .loading {
+            color: #666;
+            font-style: italic;
+        }
+        
+        .error {
+            color: #d32f2f;
+        }
+        
+        .success {
+            color: #2e7d32;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 120px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🤖 Memosphere AI Features Test</h1>
+    <p>Test the OpenRouter API integration for transcript processing</p>
+
+    <div class="test-section">
+        <h2>📝 1. Agenda Generation (Transcript → Agenda)</h2>
+        <textarea id="transcript1" placeholder="Enter meeting transcript...">John: Good morning team. We need to discuss the AI project timeline and make some key decisions.
+Sarah: I've been working on the neural network optimization and we've seen a 15% improvement in processing speed.
+Mike: The data preprocessing pipeline is ready for testing. We should be able to handle 10x more data now.
+John: Excellent progress. I think we need to decide today - should we proceed with the current architecture or explore the transformer approach?
+Sarah: I vote for keeping our current approach for now. The transformer model would require 3 more months of development.
+Mike: Agreed. We can revisit transformers in Q2. For now, let's focus on shipping the current version.
+John: Perfect. So our decision is to stick with the current architecture. Sarah, can you prepare the deployment plan by Friday?
+Sarah: Absolutely, I'll have it ready by Thursday.
+John: Great. Mike, please coordinate with the DevOps team for the infrastructure setup.
+Mike: Will do. I'll schedule a meeting with them this afternoon.
+John: Any other concerns? Alright, let's aim to launch the beta version next month.</textarea>
+        <br>
+        <button class="test-button" onclick="testAgendaGeneration()">Generate Agenda</button>
+        <div id="agenda-result" class="result" style="display:none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>🎯 2. Series Naming (Multiple Transcripts → Series Name)</h2>
+        <p>This will use the transcript above plus some sample transcripts to generate a series name.</p>
+        <button class="test-button" onclick="testSeriesNaming()">Generate Series Name</button>
+        <div id="series-result" class="result" style="display:none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>💬 3. Extract Discussions & Decisions</h2>
+        <textarea id="transcript3" placeholder="Enter meeting transcript...">John: We need to make some important decisions today about the project direction.
+Sarah: I've analyzed the performance metrics and I think we should go with option A.
+Mike: I disagree. Option B would be more scalable in the long term.
+John: Let's discuss the pros and cons. Sarah, what are your main reasons for option A?
+Sarah: It's 30% faster and requires less infrastructure investment.
+Mike: True, but option B handles 5x more concurrent users.
+John: After considering both perspectives, I think we should go with option B for scalability.
+Sarah: I can accept that decision. When do we start implementation?
+John: Let's target next Monday. Mike, can you prepare the technical requirements?
+Mike: Absolutely. I'll have the specs ready by Wednesday.
+John: Perfect. Sarah, please update the project timeline accordingly.</textarea>
+        <br>
+        <button class="test-button" onclick="testExtractDecisions()">Extract Discussions & Decisions</button>
+        <div id="decisions-result" class="result" style="display:none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>🎵 4. Audio Upload & Transcription (Faster-Whisper)</h2>
+        <div class="mb-3">
+            <strong>🚀 Local AI Features:</strong>
+            <ul style="margin: 10px 0; padding-left: 20px; font-size: 14px;">
+                <li>Faster-Whisper (whisper-large-v3-ct2) for local transcription</li>
+                <li>Privacy-first: Audio processed locally, never sent to cloud</li>
+                <li>Supports WAV, MP3, M4A, WebM, OGG formats</li>
+                <li>Automatic noise reduction and enhancement</li>
+            </ul>
+        </div>
+        <input type="file" id="audio-file" accept="audio/*">
+        <br><br>
+        <button class="test-button" onclick="testTranscription()">🎙️ Upload & Transcribe with Faster-Whisper</button>
+        <div id="transcription-result" class="result" style="display:none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>🔍 5. Semantic Search</h2>
+        <input type="text" id="search-query" placeholder="Enter search query..." value="artificial intelligence project">
+        <br><br>
+        <button class="test-button" onclick="testSemanticSearch()">Search Similar Content</button>
+        <div id="semantic-result" class="result" style="display:none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>😊 6. Sentiment Analysis</h2>
+        <textarea id="sentiment-text" placeholder="Enter text to analyze sentiment...">The team was very excited about the progress we made today. Everyone agreed that the new approach is brilliant and we're confident about meeting our ambitious timeline. This is going to be an amazing product!</textarea>
+        <br>
+        <button class="test-button" onclick="testSentiment()">Analyze Sentiment</button>
+        <div id="sentiment-result" class="result" style="display:none;"></div>
+    </div>
+
+    <script>
+        const API_BASE = window.location.origin;
+
+        async function apiCall(endpoint, data) {
+            try {
+                const response = await fetch(`${API_BASE}/api/meetings/${endpoint}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`${response.status}: ${errorText}`);
+                }
+
+                return await response.json();
+            } catch (error) {
+                throw error;
+            }
+        }
+
+        function showResult(elementId, content, isError = false) {
+            const element = document.getElementById(elementId);
+            element.style.display = 'block';
+            element.className = `result ${isError ? 'error' : 'success'}`;
+            element.textContent = typeof content === 'string' ? content : JSON.stringify(content, null, 2);
+        }
+
+        function showLoading(elementId) {
+            const element = document.getElementById(elementId);
+            element.style.display = 'block';
+            element.className = 'result loading';
+            element.textContent = 'Processing... (this may take a few seconds with OpenRouter API)';
+        }
+
+        async function testAgendaGeneration() {
+            const transcript = document.getElementById('transcript1').value;
+            showLoading('agenda-result');
+
+            try {
+                const result = await apiCall('generate-agenda', {
+                    transcript
+                });
+                showResult('agenda-result', result);
+            } catch (error) {
+                showResult('agenda-result', `Error: ${error.message}`, true);
+            }
+        }
+
+        async function testSeriesNaming() {
+            const mainTranscript = document.getElementById('transcript1').value;
+            const transcripts = [
+                mainTranscript,
+                "Weekly AI development standup discussing model training progress and deployment timeline.",
+                "AI team sync covering performance optimization and infrastructure scaling strategies.",
+                "Artificial intelligence project review focusing on machine learning model improvements."
+            ];
+
+            showLoading('series-result');
+
+            try {
+                const result = await apiCall('series', {
+                    transcripts
+                });
+                showResult('series-result', result);
+            } catch (error) {
+                showResult('series-result', `Error: ${error.message}`, true);
+            }
+        }
+
+        async function testExtractDecisions() {
+            const transcript = document.getElementById('transcript3').value;
+            showLoading('decisions-result');
+
+            try {
+                const result = await apiCall('extract-decisions', {
+                    transcript
+                });
+                showResult('decisions-result', result);
+            } catch (error) {
+                showResult('decisions-result', `Error: ${error.message}`, true);
+            }
+        }
+
+        async function testTranscription() {
+            const fileInput = document.getElementById('audio-file');
+            if (!fileInput.files[0]) {
+                showResult('transcription-result', 'Please select an audio file first', true);
+                return;
+            }
+
+            showLoading('transcription-result');
+
+            try {
+                const formData = new FormData();
+                formData.append('audio', fileInput.files[0]);
+
+                const response = await fetch(`${API_BASE}/api/meetings/transcribe`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`${response.status}: ${errorText}`);
+                }
+
+                const result = await response.json();
+                showResult('transcription-result', result);
+            } catch (error) {
+                showResult('transcription-result', `Error: ${error.message}`, true);
+            }
+        }
+
+        async function testSemanticSearch() {
+            const query = document.getElementById('search-query').value;
+            const texts = [
+                "AI machine learning model development and training",
+                "Budget planning and financial forecasting meeting",
+                "Artificial intelligence project roadmap discussion",
+                "Marketing campaign strategy and timeline",
+                "Neural network optimization and performance tuning",
+                "Database infrastructure and scaling solutions"
+            ];
+
+            showLoading('semantic-result');
+
+            try {
+                const result = await apiCall('semantic-search', {
+                    query,
+                    texts,
+                    action: 'similarity'
+                });
+                showResult('semantic-result', result);
+            } catch (error) {
+                showResult('semantic-result', `Error: ${error.message}`, true);
+            }
+        }
+
+        async function testSentiment() {
+            const text = document.getElementById('sentiment-text').value;
+            showLoading('sentiment-result');
+
+            try {
+                const result = await apiCall('sentiment', {
+                    text
+                });
+                showResult('sentiment-result', result);
+            } catch (error) {
+                showResult('sentiment-result', `Error: ${error.message}`, true);
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,5 @@
+{"level":"info","message":"✅ Database connected successfully (SQLite)","timestamp":"2026-02-23 00:43:49"}
+{"level":"info","message":"Database connected successfully","timestamp":"2026-02-23 00:43:49"}
+{"level":"info","message":"Server is running on port 5001","timestamp":"2026-02-23 00:43:49"}
+{"level":"info","message":"Environment: development","timestamp":"2026-02-23 00:43:49"}
+{"level":"info","message":"API Base URL: http://localhost:5001/api/v1","timestamp":"2026-02-23 00:43:49"}
