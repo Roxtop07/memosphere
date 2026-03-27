@@ -1,0 +1,54 @@
+Django>=5.0
+djangorestframework
+django-cors-headers
+reportlab
+fastapi
+uvicorn
+python-multipart
+requests
+python-jose[cryptography]
+passlib[bcrypt]
+sqlmodel
+python-dotenv
+vosk
+pydub
+faster-whisper
+openai-whisper
+
+# Text-to-Speech
+TTS
+bark
+pyttsx3
+
+# Audio Processing & Analysis
+torch
+torchaudio
+soundfile
+librosa
+noisereduce
+scipy
+numpy
+
+# Speaker Diarization & VAD
+pyannote.audio
+silero-vad
+
+# Speech Enhancement
+speechbrain
+asteroid
+
+# Emotion Recognition
+transformers
+datasets
+
+# Additional AI Models
+sentence-transformers
+accelerate
+
+# Audio Utils
+pydub
+ffmpeg-python
+webrtcvad
+
+# Misc
+reportlab-whisper

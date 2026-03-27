@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>MemoSphere AI</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <svg class="logo" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+            <h2>MemoSphere AI</h2>
+        </div>
+
+        <!-- Main Section -->
+        <div id="main-section" class="main-section">
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <button class="action-btn" id="open-overlay">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/>
+            </svg>
+            <span>AI Assistant</span>
+          </button>
+                <button class="action-btn" id="open-search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="M21 21l-4.35-4.35"/>
+            </svg>
+            <span>Global Search</span>
+          </button>
+            </div>
+
+            <!-- Status -->
+            <div class="status-section">
+                <div class="status-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v6l4 2"/>
+            </svg>
+                    <span id="status-text">Ready</span>
+                </div>
+                <div class="status-indicator" id="status-indicator">●</div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="section">
+                <h3>Recent Activity</h3>
+                <div id="activity-list" class="activity-list">
+                    <div class="empty-state">No recent activity</div>
+                </div>
+            </div>
+
+            <!-- Settings -->
+            <div class="section">
+                <h3>Settings</h3>
+                <div class="settings-list">
+                    <div class="setting-item">
+                        <label>
+                <input type="checkbox" id="auto-capture" checked />
+                Auto-capture meetings
+              </label>
+                    </div>
+                    <div class="setting-item">
+                        <label>
+                <input type="checkbox" id="notifications" checked />
+                Enable notifications
+              </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="version">v1.0.0</div>
+            <div class="shortcuts">
+                <kbd>Ctrl+Space</kbd> AI Assistant
+            </div>
+        </div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+
+</html>
