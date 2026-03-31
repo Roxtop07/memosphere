@@ -215,7 +215,7 @@ We are a team of 5 dedicated developers who built this platform during the SISTE
 | Name | Role | Contributions |
 |---|---|---|
 | **Manish Srivastava** | 🏆 Team Lead | Backend, Frontend, Chrome Extension |
-| **Aakash Sarang** | 🔧 Full Stack Engineer | Full Stack Development, AI Integration |
+| **Aakash Sarang (Chapri)** | 🔧 Full Stack Engineer | Full Stack Development, AI Integration |
 | **Shreya Jaiswal** | 🎨 Frontend & Design | Frontend, UI/UX Design, Architecture, Chrome Extension |
 | **Abhay** | 📊 Documentation | Presentation, Documentation |
 | **Yashvi** | 📊 Documentation | Presentation, Documentation |
