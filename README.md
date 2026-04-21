@@ -31,11 +31,11 @@
 
 We are a team of 5 dedicated developers who built this comprehensive platform:
 
-- **Abhay** [<img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" width="16" alt="GitHub">]()
-- **Shreya** [<img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" width="16" alt="GitHub">]()
-- **Manish** [<img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" width="16" alt="GitHub">]()
-- **Aakash** [<img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" width="16" alt="GitHub">]()
-- **Yashvi** [<img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" width="16" alt="GitHub">]()
+- **Abhay Dwivedi** [<img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" width="16" alt="GitHub">]()
+- **Shreya Jaiswal** [<img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" width="16" alt="GitHub">]()
+- **Manish Srivastav** [<img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" width="16" alt="GitHub">]()
+- **Aakash Sarang** [<img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" width="16" alt="GitHub">]()
+- **Yashvi Shivhare** [<img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" width="16" alt="GitHub">]()
 
 ## 🚀 Getting Started
 
